@@ -1,0 +1,170 @@
+body {
+  background-image: url("/src/images/Bitmap.jpg");
+  background-repeat: no-repeat;
+  width: 90rem;
+  height: 50rem;
+}
+
+.container {
+  margin-left: 475px;
+  position: relative;
+}
+
+.todoHeading {
+  font-family: "Josefin Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 40px;
+
+  letter-spacing: 15px;
+
+  color: #ffffff;
+}
+
+.addButton {
+  position: absolute;
+  display: flex;
+  top: 150%;
+  left: 45%;
+  width: 20px;
+  height: 20px;
+  
+}
+.add{
+ display: flex;
+ 
+  
+}
+.clear{
+  margin-left: 2px;
+}
+
+button{
+  background: linear-gradient(135deg, #55DDFF 0%, #C058F3 100%);
+  color: white;
+}
+.addTodo {
+  position: absolute;
+  top: 50%;
+  margin-top: 20px;
+  border: none;
+  width: 540px;
+  height: 64px;
+
+  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+  border-radius: 5px;
+}
+.check {
+  position: absolute;
+  left: 5px;
+}
+.delButton {
+  position: absolute;
+  right: 5px;
+}
+::placeholder {
+  padding-left: 70px;
+}
+
+.todoList {
+  position: absolute;
+  top: 400%;
+  margin-top: 24px;
+  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+  border-radius: 5px;
+  width: 540px;
+  height: 439px;
+  padding-left: 5px;
+  background-color: white;
+  overflow-y: scroll;
+  height: XXXpx;
+}
+[type=checkbox] {
+  width: 2rem;
+  height: 2rem;
+  color: dodgerblue;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background: none;
+  border: 0;
+  outline: 0;
+  flex-grow: 0;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  transition:300ms;
+  cursor: pointer;
+}
+
+
+/* Pseudo element for check styling */
+
+[type=checkbox]::before {
+  content: "";
+  color: transparent;
+  display: block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 0;
+  background-color: transparent;
+  background-size: contain;
+  box-shadow: inset 0 0 0 1px #CCD3D8;
+}
+
+
+/* Checked */
+
+[type=checkbox]:checked {
+ background: linear-gradient(135deg, #55DDFF 0%, #C058F3 100%);;
+}
+
+[type=checkbox]:checked::before {
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+}
+
+
+/* Disabled */
+
+[type=checkbox]:disabled {
+  background-color: #CCD3D8;
+  opacity: 0.84;
+  cursor: not-allowed;
+}
+
+
+/* IE */
+
+[type=checkbox]::-ms-check {
+  content: "";
+  color: transparent;
+  display: block;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 0;
+  background-color: transparent;
+  background-size: contain;
+  box-shadow: inset 0 0 0 1px #CCD3D8;
+}
+
+[type=checkbox]:checked::-ms-check {
+  box-shadow: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+}
+.todoListInner {
+  list-style: none;
+
+  margin-top: 21px;
+  margin-bottom: 24px;
+  margin-left: 70px;
+}
+
+.footer{
+  position: absolute;
+  bottom: 100%;
+  
+}
+
+
