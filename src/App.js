@@ -6,14 +6,14 @@ import { useState } from "react";
 function App() {
   const [addTask, setAddTask] = useState([]);
   const [addValue, setAddValue] = useState("");
-  const [changeClass, setChangeClass] = useState(false);
+ 
   const handleAddTask = () => {
     if (addValue.trim()) {
-      setAddTask([...addTask, addValue.trim()]);
+      setAddTask([...addTask,{task:addValue, active:true, id:Math.floor(Math.random(3 * 1000) * 1000)}]);
       setAddValue("");
     }
   };
-
+console.log(addTask);
   const handleDeleteTask = (index) => {
     const newTaskList = addTask.filter((task, i) => i !== index);
     setAddTask(newTaskList);
@@ -24,12 +24,18 @@ function App() {
   };
 
   const handleDeleteAll = () => {
-    setAddTask([]);
+    setAddTask([]); 
   };
 
-  const handleChangeClass = () =>{
-    setChangeClass(!changeClass);
-  }
+const handleChange = (id) =>{
+  
+  setAddTask(addTask.map(todo =>{
+    if(todo.id === id){
+      todo.active = !todo.active
+    }
+    return todo;
+  }))
+}
   
   return (
     <>
@@ -38,6 +44,7 @@ function App() {
         <div className="input">
           <input
             className="addTodo"
+
             value={addValue}
             onChange={handleInputChange}
             type="text"
@@ -56,9 +63,9 @@ function App() {
           {addTask.map((task, index) => {
             return (
               <div className="oneItem" key={index}>
-                <li className={"todoListInner"} >
-                  <input onChange={handleChangeClass}className="check" type="checkbox" />
-                  {task}
+                <li className={`${task.active === true ? "todoListInner" : "listActive"}`} >
+                  <input onClick={()=>handleChange(task.id)} className="check" type="checkbox" />
+                  {task.task}
 
                   <button
                     className="delButton"
