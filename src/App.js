@@ -56,7 +56,7 @@ function App() {
           {addTask.map((task, index) => {
             return (
               <div className="oneItem" key={index}>
-                <li className={changeClass ? "listActive" : "todoListInner"} >
+                <li className={"todoListInner"} >
                   <input onChange={handleChangeClass}className="check" type="checkbox" />
                   {task}
 
