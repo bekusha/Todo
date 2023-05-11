@@ -1,29 +1,60 @@
 import React from "react";
 import "./App.css";
-
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 function App() {
   const [addTask, setAddTask] = useState([]);
   const [addValue, setAddValue] = useState("");
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const handleAddTask = () => {
+  const fetchData = async () => {
+    axios
+      .get("http://localhost:3000/todos/")
+      .then((response) => {
+        setAddTask(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleAddTask = async () => {
     if (addValue.trim()) {
-      setAddTask([
-        ...addTask,
-        {
-          task: addValue,
-          active: true,
-          id: Math.floor(Math.random(3 * 1000) * 1000),
-        },
-      ]);
+      const newTask = {
+        title: addValue,
+        active: false,
+      };
+      axios
+        .post("http://localhost:3000/todos/", newTask)
+        .then((response) => {
+          setAddTask([...addTask, response.data]);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       setAddValue("");
+      fetchData();
     }
   };
-  console.log(addTask);
-  const handleDeleteTask = (index) => {
-    const newTaskList = addTask.filter((task, i) => i !== index);
-    setAddTask(newTaskList);
+
+  const handleDeleteTask = (id) => {
+    const newTaskList = addTask.filter((task, i) => i !== id);
+
+    axios
+      .delete(`http://localhost:3000/todos/${id}`)
+
+      .then(() => {
+        setAddTask(newTaskList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    fetchData();
   };
 
   const handleInputChange = (event) => {
@@ -67,24 +98,24 @@ function App() {
           </span>
         </div>
         <ul className="todoList">
-          {addTask.map((task, index) => {
+          {addTask.map((title, index) => {
+            console.log(title);
             return (
               <div className="oneItem" key={index}>
                 <li
                   className={`${
-                    task.active === true ? "todoListInner" : "listActive"
+                    title.active === true ? "listActive" : "todoListInner"
                   }`}
                 >
                   <input
-                    onClick={() => handleChange(task.id)}
+                    onClick={() => handleChange(title.id)}
                     className="check"
                     type="checkbox"
                   />
-                  {task.task}
-
+                  {title.title}
                   <button
                     className="delButton"
-                    onClick={() => handleDeleteTask(index)}
+                    onClick={() => handleDeleteTask(title.id)}
                   >
                     X
                   </button>
