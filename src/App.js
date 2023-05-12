@@ -3,7 +3,7 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TODO from "./images/Todo mobile.svg";
-import whiteSun from "./images/whitesun.svg";
+
 import x from "./images/X.svg";
 function App() {
   const [addTask, setAddTask] = useState([]);
@@ -82,7 +82,7 @@ function App() {
     <>
       <div className="container">
         <div className="headImages">
-          <img className="todoHeading" src={TODO} />
+          <img className="todoHeading" src={TODO} alt="" />
         </div>
         <div className="input">
           <input
@@ -118,13 +118,8 @@ function App() {
                     src={x}
                     className="delButton"
                     onClick={() => handleDeleteTask(title.id)}
+                    alt=""
                   />
-                  {/* <button
-                    className="delButton"
-                    onClick={() => handleDeleteTask(title.id)}
-                  >
-                    X
-                  </button> */}
                 </li>
               </div>
             );
