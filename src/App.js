@@ -2,7 +2,9 @@ import React from "react";
 import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+import TODO from "./images/Todo mobile.svg";
+import whiteSun from "./images/whitesun.svg";
+import x from "./images/X.svg";
 function App() {
   const [addTask, setAddTask] = useState([]);
   const [addValue, setAddValue] = useState("");
@@ -79,7 +81,9 @@ function App() {
   return (
     <>
       <div className="container">
-        <h1 className="todoHeading">Todo</h1>
+        <div className="headImages">
+          <img className="todoHeading" src={TODO} />
+        </div>
         <div className="input">
           <input
             className="addTodo"
@@ -91,9 +95,6 @@ function App() {
           <span className="addButton">
             <button className="add" onClick={handleAddTask}>
               +{" "}
-            </button>
-            <button className="clear" onClick={handleDeleteAll}>
-              Clear
             </button>
           </span>
         </div>
@@ -113,12 +114,17 @@ function App() {
                     type="checkbox"
                   />
                   {title.title}
-                  <button
+                  <img
+                    src={x}
+                    className="delButton"
+                    onClick={() => handleDeleteTask(title.id)}
+                  />
+                  {/* <button
                     className="delButton"
                     onClick={() => handleDeleteTask(title.id)}
                   >
                     X
-                  </button>
+                  </button> */}
                 </li>
               </div>
             );
