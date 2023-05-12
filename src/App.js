@@ -13,7 +13,7 @@ function App() {
 
   const fetchData = async () => {
     axios
-      .get("https://todo-server-77c8.onrender.com/todos/")
+      .get("https://todo-server-77c8.onrender.com/todos")
       .then((response) => {
         setAddTask(response.data);
       })
@@ -29,7 +29,7 @@ function App() {
         active: false,
       };
       axios
-        .post("https://todo-server-77c8.onrender.com/todos/", newTask)
+        .post("https://todo-server-77c8.onrender.com/todos", newTask)
         .then((response) => {
           setAddTask([...addTask, response.data]);
         })
@@ -93,7 +93,6 @@ function App() {
         </div>
         <ul className="todoList">
           {addTask.map((title, index) => {
-            console.log(title);
             return (
               <div className="oneItem" key={index}>
                 <li
