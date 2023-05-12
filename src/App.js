@@ -14,7 +14,7 @@ function App() {
 
   const fetchData = async () => {
     axios
-      .get("http://localhost:3000/todos/")
+      .get("https://todo-server-77c8.onrender.com/todos")
       .then((response) => {
         setAddTask(response.data);
         console.log(response.data);
@@ -31,7 +31,7 @@ function App() {
         active: false,
       };
       axios
-        .post("http://localhost:3000/todos/", newTask)
+        .post("https://todo-server-77c8.onrender.com/todos", newTask)
         .then((response) => {
           setAddTask([...addTask, response.data]);
           console.log(response.data);
@@ -48,15 +48,15 @@ function App() {
     const newTaskList = addTask.filter((task, i) => i !== id);
 
     axios
-      .delete(`http://localhost:3000/todos/${id}`)
+      .delete(`https://todo-server-77c8.onrender.com/todos/${id}`)
 
       .then(() => {
         setAddTask(newTaskList);
+        fetchData();
       })
       .catch((error) => {
         console.log(error);
       });
-    fetchData();
   };
 
   const handleInputChange = (event) => {

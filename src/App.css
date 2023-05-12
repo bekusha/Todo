@@ -38,6 +38,7 @@ input {
   box-shadow: 0px 35px 50px -15px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   color: white;
+  padding-left: 20px;
 }
 
 .add {
@@ -100,7 +101,7 @@ input {
 .delButton {
   position: absolute;
   right: 10px;
-  top: 15px;
+  top: 20px;
   background-color: transparent;
   border: none;
   color: #979797;
