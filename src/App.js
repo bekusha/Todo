@@ -16,7 +16,6 @@ function App() {
       .get("https://todo-server-77c8.onrender.com/todos")
       .then((response) => {
         setAddTask(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -33,7 +32,6 @@ function App() {
         .post("https://todo-server-77c8.onrender.com/todos", newTask)
         .then((response) => {
           setAddTask([...addTask, response.data]);
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -60,10 +58,6 @@ function App() {
 
   const handleInputChange = (event) => {
     setAddValue(event.target.value);
-  };
-
-  const handleDeleteAll = () => {
-    setAddTask([]);
   };
 
   const handleChange = (id) => {
