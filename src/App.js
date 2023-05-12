@@ -3,7 +3,6 @@ import "./App.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TODO from "./images/Todo mobile.svg";
-
 import x from "./images/X.svg";
 function App() {
   const [addTask, setAddTask] = useState([]);
