@@ -50,6 +50,7 @@ function App() {
       .then(() => {
         setAddTask(newTaskList);
         fetchData();
+        console.log(newTaskList);
       })
       .catch((error) => {
         console.log(error);
