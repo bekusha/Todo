@@ -4,21 +4,27 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import TODO from "./images/Todo mobile.svg";
 import x from "./images/X.svg";
+
 function App() {
   const [addTask, setAddTask] = useState([]);
   const [addValue, setAddValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
+    setIsLoading(true);
     axios
       .get("https://todo-server-77c8.onrender.com/todos")
       .then((response) => {
         setAddTask(response.data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        setIsLoading(false);
       });
   };
 
@@ -42,11 +48,10 @@ function App() {
   };
 
   const handleDeleteTask = (id) => {
-    const newTaskList = addTask.filter((i) => i !== id);
+    const newTaskList = addTask.filter((task) => task.id !== id);
 
     axios
       .delete(`https://todo-server-77c8.onrender.com/todos/${id}`)
-
       .then(() => {
         setAddTask(newTaskList);
         fetchData();
@@ -63,11 +68,14 @@ function App() {
 
   const handleChange = (id) => {
     setAddTask(
-      addTask.map((todo) => {
-        if (todo.id === id) {
-          todo.active = !todo.active;
+      addTask.map((task) => {
+        if (task.id === id) {
+          return {
+            ...task,
+            active: !task.active,
+          };
         }
-        return todo;
+        return task;
       })
     );
   };
@@ -93,30 +101,30 @@ function App() {
           </span>
         </div>
         <ul className="todoList">
-          {addTask.map((title, index) => {
-            return (
-              <div className="oneItem" key={index}>
+          {isLoading ? (
+            <div className="loader"></div>
+          ) : (
+            addTask.map((task) => (
+              <div className="oneItem" key={task.id}>
                 <li
-                  className={`${
-                    title.active === true ? "listActive" : "todoListInner"
-                  }`}
+                  className={`${task.active ? "listActive" : "todoListInner"}`}
                 >
                   <input
-                    onClick={() => handleChange(title.id)}
+                    onClick={() => handleChange(task.id)}
                     className="check"
                     type="checkbox"
                   />
-                  {title.title}
+                  {task.title}
                   <img
                     src={x}
                     className="delButton"
-                    onClick={() => handleDeleteTask(title.id)}
+                    onClick={() => handleDeleteTask(task.id)}
                     alt=""
                   />
                 </li>
               </div>
-            );
-          })}
+            ))
+          )}
         </ul>
       </div>
     </>
